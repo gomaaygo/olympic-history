@@ -8,6 +8,7 @@ requests = "*"
 django = "*"
 python-decouple = "*"
 gunicorn = "*"
+psycopg2 = "*"
 
 [dev-packages]
 
