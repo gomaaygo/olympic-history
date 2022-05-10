@@ -9,6 +9,7 @@ django = "*"
 python-decouple = "*"
 gunicorn = "*"
 psycopg2 = "*"
+django-heroku = "*"
 
 [dev-packages]
 
