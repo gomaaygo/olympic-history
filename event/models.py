@@ -28,3 +28,14 @@ class City(models.Model):
 
     def __str__(self):
         return self.city
+
+
+class Sport(models.Model):
+    sport = models.CharField(verbose_name="Sport", max_length=255, null=False, blank=False)
+
+    class Meta:
+        verbose_name = "Sport"
+        verbose_name_plural = "Sports"
+
+    def __str__(self):
+        return self.sport
