@@ -17,3 +17,14 @@ class Game(models.Model):
 
     def __str__(self):
         return str(self.year) + str(self.season)
+
+
+class City(models.Model):
+    city = models.CharField(verbose_name="City", max_length=255, null=False, blank=False)
+
+    class Meta:
+        verbose_name = "City"
+        verbose_name_plural = "Cities"
+
+    def __str__(self):
+        return self.city
