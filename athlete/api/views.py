@@ -1,9 +1,10 @@
 # DJANGO 
 from athlete.models import *
-from .serializers import TeamSerializer
+from .serializers import TeamSerializer, AthleteSerializer
 
 # DRF
 from rest_framework import generics
+from rest_framework import filters
 
 
 class TeamList(generics.ListCreateAPIView):
@@ -20,3 +21,13 @@ class TeamDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     queryset = Team.objects.all()
     serializer_class = TeamSerializer
+
+
+class AthleteList(generics.ListCreateAPIView):
+    """
+        This endpoint allows creating a athlete object and listing.
+    """
+    queryset = Athlete.objects.all()
+    serializer_class = AthleteSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['sex', 'team__team']
