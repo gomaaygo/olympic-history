@@ -11,4 +11,7 @@ urlpatterns = [
     # Urls Game
     path('game/<int:pk>/', views.GameDetail().as_view(), name="detail_game"),
     path('games/', views.GameList().as_view(), name="list_games"),
+    # Urls City
+    path('city/<int:pk>/', views.CityDetail().as_view(), name="detail_city"),
+    path('cities/', views.CityList().as_view(), name="list_cities"),    
 ]

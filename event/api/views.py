@@ -1,6 +1,6 @@
 # DJANGO 
 from event.models import *
-from .serializers import GameSerializer
+from .serializers import GameSerializer, CitySerializer
 
 # DRF
 from rest_framework import generics
@@ -21,3 +21,19 @@ class GameDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     queryset = Game.objects.all()
     serializer_class = GameSerializer
+
+
+class CityList(generics.ListCreateAPIView):
+    """
+        This endpoint allows creating a city object and listing.
+    """
+    queryset = City.objects.all()
+    serializer_class = CitySerializer
+
+
+class CityDetail(generics.RetrieveUpdateDestroyAPIView):
+    """
+        This endpoint allows viewing, updating and deleting the city object.
+    """
+    queryset = City.objects.all()
+    serializer_class = CitySerializer
