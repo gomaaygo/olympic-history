@@ -16,5 +16,8 @@ urlpatterns = [
     path('cities/', views.CityList().as_view(), name="list_cities"),
     # Urls Sport
     path('sport/<int:pk>/', views.SportDetail().as_view(), name="detail_sport"),
-    path('sports/', views.SportList().as_view(), name="list_sports"),        
+    path('sports/', views.SportList().as_view(), name="list_sports"),
+    # Urls Event
+    path('event/<int:pk>/', views.EventDetail().as_view(), name="detail_event"),
+    path('events/', views.EventList().as_view(), name="list_event"),             
 ]
