@@ -1,6 +1,8 @@
 from django.db import models
 from django.core.validators import MinValueValidator
 
+from athlete.models import Athlete
+
 # Create your models here.
 
 class Game(models.Model):
@@ -53,3 +55,22 @@ class Event(models.Model):
 
     def __str__(self):
         return self.event
+
+
+class AthleteEvent(models.Model):
+    MEDAL_CHOICES = (
+        ("Gold", "Gold"),
+        ("Silver", "Silver"),
+        ("Bronze", "Bronze"),
+        ("NA", "NA"),
+    )
+
+    athlete = models.ForeignKey(Athlete, on_delete=models.PROTECT)
+    event = models.ForeignKey(Event, on_delete=models.PROTECT)
+    weight = models.DecimalField(verbose_name='Weight', decimal_places=1, max_digits=3, null=True, blank=True)
+    height = models.IntegerField(verbose_name="Height", null=True, blank=True)
+    age = models.IntegerField(verbose_name="Age", null=True, blank=True)
+    medal = models.CharField(verbose_name="Medal", max_length=6, choices=MEDAL_CHOICES)
+
+    def __str__(self):
+        return str(self.athlete) + str(self.event)
