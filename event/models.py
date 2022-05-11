@@ -39,3 +39,17 @@ class Sport(models.Model):
 
     def __str__(self):
         return self.sport
+
+
+class Event(models.Model):
+    event = models.CharField(verbose_name="Event", max_length=255, null=False, blank=False)
+    sport = models.ForeignKey(Sport, on_delete=models.PROTECT, null=True, blank=True)
+    city = models.ForeignKey(City, on_delete=models.PROTECT, null=True, blank=True)
+    game = models.ForeignKey(Game, on_delete=models.PROTECT, null=True, blank=True)
+
+    class Meta:
+        verbose_name = "Event"
+        verbose_name_plural = "Events"
+
+    def __str__(self):
+        return self.event
