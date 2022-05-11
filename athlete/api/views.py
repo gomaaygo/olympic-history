@@ -31,3 +31,11 @@ class AthleteList(generics.ListCreateAPIView):
     serializer_class = AthleteSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ['sex', 'team__team']
+
+
+class AthleteDetail(generics.RetrieveUpdateDestroyAPIView):
+    """
+        This endpoint allows viewing, updating and deleting the athlete object.
+    """
+    queryset = Athlete.objects.all()
+    serializer_class = AthleteSerializer
