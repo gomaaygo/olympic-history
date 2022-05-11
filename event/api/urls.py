@@ -13,5 +13,8 @@ urlpatterns = [
     path('games/', views.GameList().as_view(), name="list_games"),
     # Urls City
     path('city/<int:pk>/', views.CityDetail().as_view(), name="detail_city"),
-    path('cities/', views.CityList().as_view(), name="list_cities"),    
+    path('cities/', views.CityList().as_view(), name="list_cities"),
+    # Urls Sport
+    path('sport/<int:pk>/', views.SportDetail().as_view(), name="detail_sport"),
+    path('sports/', views.SportList().as_view(), name="list_sports"),        
 ]
