@@ -10,6 +10,8 @@ python-decouple = "*"
 gunicorn = "*"
 psycopg2 = "*"
 django-heroku = "*"
+djangorestframework = "*"
+django-filter = "*"
 
 [dev-packages]
 
