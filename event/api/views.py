@@ -1,6 +1,6 @@
 # DJANGO 
 from event.models import *
-from .serializers import GameSerializer, CitySerializer, SportSerializer, EventSerializer
+from .serializers import GameSerializer, CitySerializer, SportSerializer, EventSerializer, AthleteEventSerializer
 
 # DRF
 from rest_framework import generics
@@ -69,3 +69,22 @@ class EventDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     queryset = Event.objects.all()
     serializer_class = EventSerializer
+
+
+class AthleteEventList(generics.ListCreateAPIView):
+    """
+        This endpoint allows creating a athleteevent object and listing. 
+        It is also possible to filter by: athlete, team, event, sex, age and medal
+    """
+    queryset = AthleteEvent.objects.all()
+    serializer_class = AthleteEventSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['athlete', 'athlete__team', 'event__event', 'athlete__sex', 'age', 'medal']
+
+
+class AthleteEventDetail(generics.RetrieveUpdateDestroyAPIView):
+    """
+        This endpoint allows viewing, updating and deleting the athleteevent object.
+    """
+    queryset = AthleteEvent.objects.all()
+    serializer_class = AthleteEventSerializer

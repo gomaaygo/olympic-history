@@ -27,3 +27,9 @@ class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
         fields = "__all__"
+
+
+class AthleteEventSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AthleteEvent
+        fields = "__all__"

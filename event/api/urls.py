@@ -2,7 +2,7 @@
 from django.urls import include, path
 
 # DRF
-from .views import GameDetail, GameList
+# from .views import GameDetail, GameList
 from . import views
 
 app_name = 'api'
@@ -19,5 +19,8 @@ urlpatterns = [
     path('sports/', views.SportList().as_view(), name="list_sports"),
     # Urls Event
     path('event/<int:pk>/', views.EventDetail().as_view(), name="detail_event"),
-    path('events/', views.EventList().as_view(), name="list_event"),             
+    path('events/', views.EventList().as_view(), name="list_event"),
+    # Urls AthleteEvent
+    path('athlete/event/<int:pk>/', views.AthleteEventDetail().as_view(), name="detail_athlete_event"),
+    path('athlete/events/', views.AthleteEventList().as_view(), name="list_athlete_event"),               
 ]
