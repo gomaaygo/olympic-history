@@ -12,6 +12,7 @@ psycopg2 = "*"
 django-heroku = "*"
 djangorestframework = "*"
 django-filter = "*"
+django-extensions = "*"
 
 [dev-packages]
 
