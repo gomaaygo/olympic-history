@@ -1,0 +1,177 @@
+swagger: "2.0"
+info:
+  description: "Documentação do projeto Olympic History!"
+  version: "1.0.0"
+  title: "Olympic History"
+
+basePath: "/api/"
+schemes:
+- "http"
+
+tags:
+  - name: "team"
+    description: "Abaixo é possível visualizar os endpoints que interagem com o modelo Team."
+
+paths:
+  /teams/:
+    get:
+      summary: "Endpoint para listar equipe."
+      tags:
+      - team
+      operationId: "list"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          type: array
+          description: "OK"
+          schema:
+            items:
+              $ref: "#/definitions/Team"
+    post:
+      summary: "Endpoint para cadastrar uma equipe."
+      tags:
+      - team
+      operationId: "create"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Será adicionado uma organização a plataforma."
+        required: true
+        schema:
+          $ref: "#/definitions/TeamCreate"
+      responses:
+        201:
+          type: array
+          description: "CREATED"
+          schema:
+            items:
+              $ref: "#/definitions/Team"
+  /team/{id}/:
+    get:
+      summary: "Endpoint para de detalhes de uma equipe."
+      tags:
+      - team
+      operationId: "detail"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID da Equipe"
+        type: int
+      responses:
+        200:
+          type: array
+          description: "OK"
+          schema:
+            items:
+              $ref: "#/definitions/Team"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
+    put:
+      summary: "Endpoint para atualizar dados da equipe."
+      tags:
+      - team
+      operationId: "update"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID da Equipe"
+        type: int
+      - in: "body"
+        name: "body"
+        description: "Será atualizado os dados da equipe."
+        required: true
+        schema:
+          $ref: "#/definitions/TeamCreate"
+      responses:
+        200:
+          type: array
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Team"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
+    delete:
+      summary: "Endpoint para deletar equipe."
+      tags:
+      - team
+      operationId: "delete"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID da Equipe"
+        type: int
+      responses:
+        204:
+          type: array
+          description: "No Content"
+          schema:
+            $ref: "#/definitions/Team"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
+
+definitions:
+  Team:
+    type: object
+    properties:
+      id:
+        type: int
+        example: 1
+      team:
+        type: string
+        maximum: 255
+        example: "Brazil"          
+      noc:
+        type: string
+        maximum: 3
+        example: "BR"
+  TeamCreate:
+    type: object
+    properties:
+      team:
+        type: string
+        maximum: 255
+        example: "Brazil"          
+      noc:
+        type: string
+        maximum: 3
+        example: "BR"
+        
+
+
