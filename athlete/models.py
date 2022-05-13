@@ -21,7 +21,7 @@ class Athlete(models.Model):
     )
     name = models.CharField(verbose_name="Name", max_length=200, null=False, blank=False)
     sex = models.CharField(verbose_name="Sex", max_length=1, choices=SEX_CHOICES, null=False, blank=False)
-    team = models.ForeignKey(Team, verbose_name="Team", on_delete=models.PROTECT) 
+    team = models.ForeignKey(Team, verbose_name="Team", on_delete=models.CASCADE) 
 
     class Meta:
         verbose_name = "Athlete"
