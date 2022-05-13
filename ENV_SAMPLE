@@ -1,0 +1,8 @@
+SECRET_KEY=
+ALLOWED_HOSTS=127.0.0.1, .localhost, .herokuapp.com
+DEBUG=TRUE
+DB_NAME=
+DB_USER=
+DB_PASS= 
+DB_HOST=localhost
+DB_PORT=5432
