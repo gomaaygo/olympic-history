@@ -11,6 +11,8 @@ schemes:
 tags:
   - name: "team"
     description: "Abaixo é possível visualizar os endpoints que interagem com o modelo Team."
+  - name: "athlete"
+    description: "Abaixo é possível visualizar os endpoints que interagem com o modelo Athlete."
 
 paths:
   /teams/:
@@ -42,7 +44,7 @@ paths:
       parameters:
       - in: "body"
         name: "body"
-        description: "Será adicionado uma organização a plataforma."
+        description: "Será adicionado uma equipe a plataforma"
         required: true
         schema:
           $ref: "#/definitions/TeamCreate"
@@ -51,8 +53,7 @@ paths:
           type: array
           description: "CREATED"
           schema:
-            items:
-              $ref: "#/definitions/Team"
+            $ref: "#/definitions/Team"
   /team/{id}/:
     get:
       summary: "Endpoint para de detalhes de uma equipe."
@@ -73,8 +74,7 @@ paths:
           type: array
           description: "OK"
           schema:
-            items:
-              $ref: "#/definitions/Team"
+            $ref: "#/definitions/Team"
         404:
             description: "Not found"
             schema:
@@ -135,8 +135,134 @@ paths:
         204:
           type: array
           description: "No Content"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
+  /athletes/:
+    get:
+      summary: "Endpoint para listar atletas."
+      tags:
+      - athlete
+      operationId: "list"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          type: array
+          description: "OK"
           schema:
-            $ref: "#/definitions/Team"
+            items:
+              $ref: "#/definitions/Athlete"
+    post:
+      summary: "Endpoint para cadastrar um(a) atleta."
+      tags:
+      - athlete
+      operationId: "create"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Será adicionado um(a) atleta."
+        required: true
+        schema:
+          $ref: "#/definitions/AthleteCreate"
+      responses:
+        201:
+          type: array
+          description: "CREATED"
+          schema:
+            $ref: "#/definitions/Athlete"
+  /athlete/{id}/:
+    get:
+      summary: "Endpoint para de detalhes de um(a) atleta."
+      tags:
+      - athlete
+      operationId: "detail"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID do(a) atleta."
+        type: int
+      responses:
+        200:
+          type: array
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Athlete"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
+    put:
+      summary: "Endpoint para atualizar dados do(a) atleta."
+      tags:
+      - athlete
+      operationId: "update"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID do(a) Atleta"
+        type: int
+      - in: "body"
+        name: "body"
+        description: "Será atualizado os dados da equipe."
+        required: true
+        schema:
+          $ref: "#/definitions/AthleteCreate"
+      responses:
+        200:
+          type: array
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Athlete"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
+    delete:
+      summary: "Endpoint para deletar um(a) atleta."
+      tags:
+      - athlete
+      operationId: "delete"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID do(a) atleta"
+        type: int
+      responses:
+        204:
+          type: array
+          description: "No Content"
         404:
             description: "Not found"
             schema:
@@ -172,6 +298,36 @@ definitions:
         type: string
         maximum: 3
         example: "BR"
-        
+  Athlete:
+    type: object
+    properties:
+      id:
+        type: int
+        example: 1
+      name:
+        type: string
+        maximum: 255
+        example: "Marta Silva"          
+      sex:
+        type: string
+        maximum: 1
+        example: "F"
+      team:
+        type: int
+        example: 1
+  AthleteCreate:
+    type: object
+    properties:
+      name:
+        type: string
+        maximum: 255
+        example: "Marta Silva"          
+      sex:
+        type: string
+        maximum: 1
+        example: "F"
+      team:
+        type: int
+        example: 1
 
 
