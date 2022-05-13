@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  description: "Seja bem vindo(a). Aqui está a documentação necessária para o consumo da Olympic History API."
+  description: "Seja bem vindo(a). Esta é a documentação necessária para o consumo da Olympic History API."
   version: "1.0.0"
   title: "Olympic H - API"
 
@@ -531,6 +531,134 @@ paths:
                 detail:
                   type: object
                   example: "Não encontrado."
+  /sports/:
+    get:
+      summary: "Endpoint para listar esportes."
+      tags:
+      - sport
+      operationId: "list"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          type: array
+          description: "OK"
+          schema:
+            items:
+              $ref: "#/definitions/Sport"
+    post:
+      summary: "Endpoint para cadastrar um esporte."
+      tags:
+      - sport
+      operationId: "create"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Será adicionado um novo esporte."
+        required: true
+        schema:
+          $ref: "#/definitions/SportCreate"
+      responses:
+        201:
+          type: array
+          description: "CREATED"
+          schema:
+            $ref: "#/definitions/Sport"
+  /sport/{id}/:
+    get:
+      summary: "Endpoint para de detalhes de um esporte."
+      tags:
+      - sport
+      operationId: "detail"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID do sporte"
+        type: int
+      responses:
+        200:
+          type: array
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Sport"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
+    put:
+      summary: "Endpoint para atualizar dados do esporte"
+      tags:
+      - sport
+      operationId: "update"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID do esporte"
+        type: int
+      - in: "body"
+        name: "body"
+        description: "Será atualizado os dados do esporte."
+        required: true
+        schema:
+          $ref: "#/definitions/SportCreate"
+      responses:
+        200:
+          type: array
+          description: "OK"
+          schema:
+            $ref: "#/definitions/City"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
+    delete:
+      summary: "Endpoint para deletar um esporte."
+      tags:
+      - sport
+      operationId: "delete"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID do esporte"
+        type: int
+      responses:
+        204:
+          type: array
+          description: "No Content"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
 
 definitions:
   Team:
@@ -630,6 +758,23 @@ definitions:
       city:
         type: string
         maximum: 255
-        example: "Corrente"     
+        example: "Corrente"
+  Sport:
+    type: object
+    properties:
+      id:
+        type: int
+        example: 1
+      sport:
+        type: string
+        maximum: 255
+        example: "Basketball"          
+  SportCreate:
+    type: object
+    properties:
+      sport:
+        type: string
+        maximum: 255
+        example: "Basketball"         
 
 
