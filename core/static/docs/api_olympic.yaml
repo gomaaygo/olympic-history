@@ -13,6 +13,8 @@ tags:
     description: "Abaixo é possível visualizar os endpoints que interagem com o modelo Team."
   - name: "athlete"
     description: "Abaixo é possível visualizar os endpoints que interagem com o modelo Athlete."
+  - name: "game"
+    description: "Abaixo é possível visualizar os endpoints que interagem com o modelo Game."
 
 paths:
   /teams/:
@@ -271,6 +273,134 @@ paths:
                 detail:
                   type: object
                   example: "Não encontrado."
+  /games/:
+    get:
+      summary: "Endpoint para listar jogos."
+      tags:
+      - game
+      operationId: "list"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          type: array
+          description: "OK"
+          schema:
+            items:
+              $ref: "#/definitions/Game"
+    post:
+      summary: "Endpoint para cadastrar um jogo."
+      tags:
+      - game
+      operationId: "create"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Será adicionado um novo jogo"
+        required: true
+        schema:
+          $ref: "#/definitions/GameCreate"
+      responses:
+        201:
+          type: array
+          description: "CREATED"
+          schema:
+            $ref: "#/definitions/Game"
+  /game/{id}/:
+    get:
+      summary: "Endpoint para de detalhes de um jogo."
+      tags:
+      - game
+      operationId: "detail"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID do jogo"
+        type: int
+      responses:
+        200:
+          type: array
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Game"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
+    put:
+      summary: "Endpoint para atualizar dados do jogo."
+      tags:
+      - game
+      operationId: "update"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID do jogo"
+        type: int
+      - in: "body"
+        name: "body"
+        description: "Será atualizado os dados do jogo."
+        required: true
+        schema:
+          $ref: "#/definitions/GameCreate"
+      responses:
+        200:
+          type: array
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Game"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
+    delete:
+      summary: "Endpoint para deletar um jogo."
+      tags:
+      - game
+      operationId: "delete"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID do jogo"
+        type: int
+      responses:
+        204:
+          type: array
+          description: "No Content"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
 
 definitions:
   Team:
@@ -329,5 +459,30 @@ definitions:
       team:
         type: int
         example: 1
+  Game:
+    type: object
+    properties:
+      id:
+        type: int
+        example: 1
+      year:
+        type: int
+        maximum: 4
+        example: 1992          
+      season:
+        type: string
+        maximum: 6
+        example: "Summer"
+  GameCreate:
+    type: object
+    properties:
+      year:
+        type: int
+        maximum: 4
+        example: 1992          
+      season:
+        type: string
+        maximum: 6
+        example: "Summer"
 
 
