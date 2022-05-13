@@ -45,9 +45,9 @@ class Sport(models.Model):
 
 class Event(models.Model):
     event = models.CharField(verbose_name="Event", max_length=255, null=False, blank=False)
-    sport = models.ForeignKey(Sport, on_delete=models.PROTECT, null=True, blank=True)
-    city = models.ForeignKey(City, on_delete=models.PROTECT, null=True, blank=True)
-    game = models.ForeignKey(Game, on_delete=models.PROTECT, null=True, blank=True)
+    sport = models.ForeignKey(Sport, on_delete=models.CASCADE, null=True, blank=True)
+    city = models.ForeignKey(City, on_delete=models.CASCADE, null=True, blank=True)
+    game = models.ForeignKey(Game, on_delete=models.CASCADE, null=True, blank=True)
 
     class Meta:
         verbose_name = "Event"
@@ -65,9 +65,9 @@ class AthleteEvent(models.Model):
         ("NA", "NA"),
     )
 
-    athlete = models.ForeignKey(Athlete, on_delete=models.PROTECT)
-    event = models.ForeignKey(Event, on_delete=models.PROTECT)
-    weight = models.DecimalField(verbose_name='Weight', decimal_places=1, max_digits=3, null=True, blank=True)
+    athlete = models.ForeignKey(Athlete, on_delete=models.CASCADE)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    weight = models.DecimalField(verbose_name='Weight', decimal_places=1, max_digits=4, null=True, blank=True)
     height = models.IntegerField(verbose_name="Height", null=True, blank=True)
     age = models.IntegerField(verbose_name="Age", null=True, blank=True)
     medal = models.CharField(verbose_name="Medal", max_length=6, choices=MEDAL_CHOICES)
