@@ -1,8 +1,8 @@
 swagger: "2.0"
 info:
-  description: "Documentação do projeto Olympic History!"
+  description: "Seja bem vindo(a). Aqui está a documentação necessária para o consumo da Olympic History API."
   version: "1.0.0"
-  title: "Olympic History"
+  title: "Olympic H - API"
 
 basePath: "/api/"
 schemes:
@@ -15,6 +15,8 @@ tags:
     description: "Abaixo é possível visualizar os endpoints que interagem com o modelo Athlete."
   - name: "game"
     description: "Abaixo é possível visualizar os endpoints que interagem com o modelo Game."
+  - name: "city"
+    description: "Abaixo é possível visualizar os endpoints que interagem com o modelo City."
 
 paths:
   /teams/:
@@ -401,6 +403,134 @@ paths:
                 detail:
                   type: object
                   example: "Não encontrado."
+  /cities/:
+    get:
+      summary: "Endpoint para listar cidades."
+      tags:
+      - city
+      operationId: "list"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          type: array
+          description: "OK"
+          schema:
+            items:
+              $ref: "#/definitions/City"
+    post:
+      summary: "Endpoint para cadastrar uma cidade."
+      tags:
+      - city
+      operationId: "create"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Será adicionado uma nova cidade."
+        required: true
+        schema:
+          $ref: "#/definitions/CityCreate"
+      responses:
+        201:
+          type: array
+          description: "CREATED"
+          schema:
+            $ref: "#/definitions/City"
+  /city/{id}/:
+    get:
+      summary: "Endpoint para de detalhes de uma cidade."
+      tags:
+      - city
+      operationId: "detail"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID da cidade"
+        type: int
+      responses:
+        200:
+          type: array
+          description: "OK"
+          schema:
+            $ref: "#/definitions/City"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
+    put:
+      summary: "Endpoint para atualizar dados da cidade."
+      tags:
+      - city
+      operationId: "update"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID da cidade"
+        type: int
+      - in: "body"
+        name: "body"
+        description: "Será atualizado os dados da cidade"
+        required: true
+        schema:
+          $ref: "#/definitions/CityCreate"
+      responses:
+        200:
+          type: array
+          description: "OK"
+          schema:
+            $ref: "#/definitions/City"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
+    delete:
+      summary: "Endpoint para deletar uma cidade."
+      tags:
+      - city
+      operationId: "delete"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID da cidade"
+        type: int
+      responses:
+        204:
+          type: array
+          description: "No Content"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
 
 definitions:
   Team:
@@ -484,5 +614,22 @@ definitions:
         type: string
         maximum: 6
         example: "Summer"
+  City:
+    type: object
+    properties:
+      id:
+        type: int
+        example: 1
+      city:
+        type: string
+        maximum: 255
+        example: "Corrente"          
+  CityCreate:
+    type: object
+    properties:
+      city:
+        type: string
+        maximum: 255
+        example: "Corrente"     
 
 
