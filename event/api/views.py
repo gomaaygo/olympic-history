@@ -79,7 +79,7 @@ class AthleteEventList(generics.ListCreateAPIView):
     queryset = AthleteEvent.objects.all()
     serializer_class = AthleteEventSerializer
     filter_backends = [filters.SearchFilter]
-    search_fields = ['athlete', 'athlete__team', 'event__event', 'athlete__sex', 'age', 'medal']
+    search_fields = ['athlete__name', 'athlete__team__team', 'event__event', 'athlete__sex', 'age', 'medal']
 
 
 class AthleteEventDetail(generics.RetrieveUpdateDestroyAPIView):

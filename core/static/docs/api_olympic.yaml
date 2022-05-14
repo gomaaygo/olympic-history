@@ -1,0 +1,1103 @@
+swagger: "2.0"
+info:
+  description: "Seja bem vindo(a). Esta é a documentação necessária para o consumo da Olympic History API."
+  version: "1.0.0"
+  title: "Olympic H - API"
+
+basePath: "/api/"
+schemes:
+- "http"
+
+tags:
+  - name: "team"
+    description: "Abaixo é possível visualizar os endpoints que interagem com o modelo Team."
+  - name: "athlete"
+    description: "Abaixo é possível visualizar os endpoints que interagem com o modelo Athlete."
+  - name: "game"
+    description: "Abaixo é possível visualizar os endpoints que interagem com o modelo Game."
+  - name: "city"
+    description: "Abaixo é possível visualizar os endpoints que interagem com o modelo City."
+  - name: "sport"
+    description: "Abaixo é possível visualizar os endpoints que interagem com o modelo Esporte."
+  - name: "event"
+    description: "Abaixo é possível visualizar os endpoints que interagem com o modelo Evento."
+  - name: "athleteevent"
+    description: "Abaixo é possível visualizar os endpoints que interagem com o modelo Athlete Evento."
+
+
+paths:
+  /teams/:
+    get:
+      summary: "Endpoint para listar equipe."
+      tags:
+      - team
+      operationId: "list"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          type: array
+          description: "OK"
+          schema:
+            items:
+              $ref: "#/definitions/Team"
+    post:
+      summary: "Endpoint para cadastrar uma equipe."
+      tags:
+      - team
+      operationId: "create"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Será adicionado uma equipe a plataforma"
+        required: true
+        schema:
+          $ref: "#/definitions/TeamCreate"
+      responses:
+        201:
+          type: array
+          description: "CREATED"
+          schema:
+            $ref: "#/definitions/Team"
+  /team/{id}/:
+    get:
+      summary: "Endpoint para de detalhes de uma equipe."
+      tags:
+      - team
+      operationId: "detail"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID da Equipe"
+        type: int
+      responses:
+        200:
+          type: array
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Team"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
+    put:
+      summary: "Endpoint para atualizar dados da equipe."
+      tags:
+      - team
+      operationId: "update"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID da Equipe"
+        type: int
+      - in: "body"
+        name: "body"
+        description: "Será atualizado os dados da equipe."
+        required: true
+        schema:
+          $ref: "#/definitions/TeamCreate"
+      responses:
+        200:
+          type: array
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Team"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
+    delete:
+      summary: "Endpoint para deletar equipe."
+      tags:
+      - team
+      operationId: "delete"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID da Equipe"
+        type: int
+      responses:
+        204:
+          type: array
+          description: "No Content"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
+  /athletes/:
+    get:
+      summary: "Endpoint para listar atletas."
+      tags:
+      - athlete
+      operationId: "list"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          type: array
+          description: "OK"
+          schema:
+            items:
+              $ref: "#/definitions/Athlete"
+    post:
+      summary: "Endpoint para cadastrar um(a) atleta."
+      tags:
+      - athlete
+      operationId: "create"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Será adicionado um(a) atleta."
+        required: true
+        schema:
+          $ref: "#/definitions/AthleteCreate"
+      responses:
+        201:
+          type: array
+          description: "CREATED"
+          schema:
+            $ref: "#/definitions/Athlete"
+  /athlete/{id}/:
+    get:
+      summary: "Endpoint para de detalhes de um(a) atleta."
+      tags:
+      - athlete
+      operationId: "detail"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID do(a) atleta."
+        type: int
+      responses:
+        200:
+          type: array
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Athlete"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
+    put:
+      summary: "Endpoint para atualizar dados do(a) atleta."
+      tags:
+      - athlete
+      operationId: "update"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID do(a) Atleta"
+        type: int
+      - in: "body"
+        name: "body"
+        description: "Será atualizado os dados da equipe."
+        required: true
+        schema:
+          $ref: "#/definitions/AthleteCreate"
+      responses:
+        200:
+          type: array
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Athlete"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
+    delete:
+      summary: "Endpoint para deletar um(a) atleta."
+      tags:
+      - athlete
+      operationId: "delete"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID do(a) atleta"
+        type: int
+      responses:
+        204:
+          type: array
+          description: "No Content"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
+  /games/:
+    get:
+      summary: "Endpoint para listar jogos."
+      tags:
+      - game
+      operationId: "list"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          type: array
+          description: "OK"
+          schema:
+            items:
+              $ref: "#/definitions/Game"
+    post:
+      summary: "Endpoint para cadastrar um jogo."
+      tags:
+      - game
+      operationId: "create"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Será adicionado um novo jogo"
+        required: true
+        schema:
+          $ref: "#/definitions/GameCreate"
+      responses:
+        201:
+          type: array
+          description: "CREATED"
+          schema:
+            $ref: "#/definitions/Game"
+  /game/{id}/:
+    get:
+      summary: "Endpoint para de detalhes de um jogo."
+      tags:
+      - game
+      operationId: "detail"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID do jogo"
+        type: int
+      responses:
+        200:
+          type: array
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Game"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
+    put:
+      summary: "Endpoint para atualizar dados do jogo."
+      tags:
+      - game
+      operationId: "update"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID do jogo"
+        type: int
+      - in: "body"
+        name: "body"
+        description: "Será atualizado os dados do jogo."
+        required: true
+        schema:
+          $ref: "#/definitions/GameCreate"
+      responses:
+        200:
+          type: array
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Game"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
+    delete:
+      summary: "Endpoint para deletar um jogo."
+      tags:
+      - game
+      operationId: "delete"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID do jogo"
+        type: int
+      responses:
+        204:
+          type: array
+          description: "No Content"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
+  /cities/:
+    get:
+      summary: "Endpoint para listar cidades."
+      tags:
+      - city
+      operationId: "list"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          type: array
+          description: "OK"
+          schema:
+            items:
+              $ref: "#/definitions/City"
+    post:
+      summary: "Endpoint para cadastrar uma cidade."
+      tags:
+      - city
+      operationId: "create"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Será adicionado uma nova cidade."
+        required: true
+        schema:
+          $ref: "#/definitions/CityCreate"
+      responses:
+        201:
+          type: array
+          description: "CREATED"
+          schema:
+            $ref: "#/definitions/City"
+  /city/{id}/:
+    get:
+      summary: "Endpoint para de detalhes de uma cidade."
+      tags:
+      - city
+      operationId: "detail"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID da cidade"
+        type: int
+      responses:
+        200:
+          type: array
+          description: "OK"
+          schema:
+            $ref: "#/definitions/City"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
+    put:
+      summary: "Endpoint para atualizar dados da cidade."
+      tags:
+      - city
+      operationId: "update"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID da cidade"
+        type: int
+      - in: "body"
+        name: "body"
+        description: "Será atualizado os dados da cidade"
+        required: true
+        schema:
+          $ref: "#/definitions/CityCreate"
+      responses:
+        200:
+          type: array
+          description: "OK"
+          schema:
+            $ref: "#/definitions/City"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
+    delete:
+      summary: "Endpoint para deletar uma cidade."
+      tags:
+      - city
+      operationId: "delete"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID da cidade"
+        type: int
+      responses:
+        204:
+          type: array
+          description: "No Content"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
+  /sports/:
+    get:
+      summary: "Endpoint para listar esportes."
+      tags:
+      - sport
+      operationId: "list"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          type: array
+          description: "OK"
+          schema:
+            items:
+              $ref: "#/definitions/Sport"
+    post:
+      summary: "Endpoint para cadastrar um esporte."
+      tags:
+      - sport
+      operationId: "create"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Será adicionado um novo esporte."
+        required: true
+        schema:
+          $ref: "#/definitions/SportCreate"
+      responses:
+        201:
+          type: array
+          description: "CREATED"
+          schema:
+            $ref: "#/definitions/Sport"
+  /sport/{id}/:
+    get:
+      summary: "Endpoint para de detalhes de um esporte."
+      tags:
+      - sport
+      operationId: "detail"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID do sporte"
+        type: int
+      responses:
+        200:
+          type: array
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Sport"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
+    put:
+      summary: "Endpoint para atualizar dados do esporte"
+      tags:
+      - sport
+      operationId: "update"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID do esporte"
+        type: int
+      - in: "body"
+        name: "body"
+        description: "Será atualizado os dados do esporte."
+        required: true
+        schema:
+          $ref: "#/definitions/SportCreate"
+      responses:
+        200:
+          type: array
+          description: "OK"
+          schema:
+            $ref: "#/definitions/City"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
+    delete:
+      summary: "Endpoint para deletar um esporte."
+      tags:
+      - sport
+      operationId: "delete"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID do esporte"
+        type: int
+      responses:
+        204:
+          type: array
+          description: "No Content"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
+  /events/:
+    get:
+      summary: "Endpoint para listar eventos."
+      tags:
+      - event
+      operationId: "list"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          type: array
+          description: "OK"
+          schema:
+            items:
+              $ref: "#/definitions/Event"
+    post:
+      summary: "Endpoint para cadastrar um evento."
+      tags:
+      - event
+      operationId: "create"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Será adicionado um novo evento."
+        required: true
+        schema:
+          $ref: "#/definitions/EventCreate"
+      responses:
+        201:
+          type: array
+          description: "CREATED"
+          schema:
+            $ref: "#/definitions/Event"
+  /event/{id}/:
+    get:
+      summary: "Endpoint para de detalhes de um evento."
+      tags:
+      - event
+      operationId: "detail"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID do evento"
+        type: int
+      responses:
+        200:
+          type: array
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Event"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
+    put:
+      summary: "Endpoint para atualizar dados do evento."
+      tags:
+      - event
+      operationId: "update"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID do evento"
+        type: int
+      - in: "body"
+        name: "body"
+        description: "Será atualizado os dados do evento."
+        required: true
+        schema:
+          $ref: "#/definitions/EventCreate"
+      responses:
+        200:
+          type: array
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Event"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
+    delete:
+      summary: "Endpoint para deletar um evento."
+      tags:
+      - event
+      operationId: "delete"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID do evento"
+        type: int
+      responses:
+        204:
+          type: array
+          description: "No Content"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
+  /athlete/events/:
+    get:
+      summary: "Endpoint para listar os atletas e seus resultados em um evento. Aqui também é possível filtrar por: nome do atleta, time, título do evento, sexo e medalha. Basta adicionar a string <?search=parametro> após a barra."
+      tags:
+      - athleteevent
+      operationId: "list"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          type: array
+          description: "OK"
+          schema:
+            items:
+              $ref: "#/definitions/AthleteEvent"
+    post:
+      summary: "Endpoint para cadastrar um atleta e seus resultados."
+      tags:
+      - athleteevent
+      operationId: "create"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Será adicionado um novo registro de resultados de um atleta."
+        required: true
+        schema:
+          $ref: "#/definitions/AthleteEventCreate"
+      responses:
+        201:
+          type: array
+          description: "CREATED"
+          schema:
+            $ref: "#/definitions/AthleteEvent"
+  /athlete/event/{id}/:
+    get:
+      summary: "Endpoint para de detalhes de um participação do atleta em um evento."
+      tags:
+      - athleteevent
+      operationId: "detail"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID da participação"
+        type: int
+      responses:
+        200:
+          type: array
+          description: "OK"
+          schema:
+            $ref: "#/definitions/AthleteEvent"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
+    put:
+      summary: "Endpoint para atualizar da participação do(a) atleta no evento."
+      tags:
+      - athleteevent
+      operationId: "update"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID da participação"
+        type: int
+      - in: "body"
+        name: "body"
+        description: "Será atualizado os dados da participação do(a) atleta no evento."
+        required: true
+        schema:
+          $ref: "#/definitions/EventCreate"
+      responses:
+        200:
+          type: array
+          description: "OK"
+          schema:
+            $ref: "#/definitions/AthleteEvent"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
+    delete:
+      summary: "Endpoint para deletar a participação do atleta no evento."
+      tags:
+      - athleteevent
+      operationId: "delete"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID da participação do atleta no evento."
+        type: int
+      responses:
+        204:
+          type: array
+          description: "No Content"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
+
+definitions:
+  Team:
+    type: object
+    properties:
+      id:
+        type: int
+        example: 1
+      team:
+        type: string
+        maximum: 255
+        example: "Brazil"          
+      noc:
+        type: string
+        maximum: 3
+        example: "BR"
+  TeamCreate:
+    type: object
+    properties:
+      team:
+        type: string
+        maximum: 255
+        example: "Brazil"          
+      noc:
+        type: string
+        maximum: 3
+        example: "BR"
+  Athlete:
+    type: object
+    properties:
+      id:
+        type: int
+        example: 1
+      name:
+        type: string
+        maximum: 255
+        example: "Marta Silva"          
+      sex:
+        type: string
+        maximum: 1
+        example: "F"
+      team:
+        type: int
+        example: 1
+  AthleteCreate:
+    type: object
+    properties:
+      name:
+        type: string
+        maximum: 255
+        example: "Marta Silva"          
+      sex:
+        type: string
+        maximum: 1
+        example: "F"
+      team:
+        type: int
+        example: 1
+  Game:
+    type: object
+    properties:
+      id:
+        type: int
+        example: 1
+      year:
+        type: int
+        maximum: 4
+        example: 1992          
+      season:
+        type: string
+        maximum: 6
+        example: "Summer"
+  GameCreate:
+    type: object
+    properties:
+      year:
+        type: int
+        maximum: 4
+        example: 1992          
+      season:
+        type: string
+        maximum: 6
+        example: "Summer"
+  City:
+    type: object
+    properties:
+      id:
+        type: int
+        example: 1
+      city:
+        type: string
+        maximum: 255
+        example: "Corrente"          
+  CityCreate:
+    type: object
+    properties:
+      city:
+        type: string
+        maximum: 255
+        example: "Corrente"
+  Sport:
+    type: object
+    properties:
+      id:
+        type: int
+        example: 1
+      sport:
+        type: string
+        maximum: 255
+        example: "Basketball"          
+  SportCreate:
+    type: object
+    properties:
+      sport:
+        type: string
+        maximum: 255
+        example: "Basketball"
+  Event:
+    type: object
+    properties:
+      id:
+        type: int
+        example: 1
+      event:
+        type: string
+        maximum: 255
+        example: "Basketball Men's Basketball"
+      sport:
+        type: int
+        example: 1
+      city:
+        type: int
+        example: 1
+      game:
+        type: int
+        example: 1            
+  EventCreate:
+    type: object
+    properties:
+      event:
+        type: string
+        maximum: 255
+        example: "Basketball Men's Basketball"
+      sport:
+        type: int
+        example: 1
+      city:
+        type: int
+        example: 1
+      game:
+        type: int
+        example: 1
+  AthleteEvent:
+    type: object
+    properties:
+      id:
+        type: int
+        example: 1
+      event:
+        type: int
+        example: 1
+      athleta:
+        type: int
+        example: 1
+      weight:
+        type: decimal
+        example: 80.0
+      height:
+        type: int
+        example: 180
+      age:
+        type: int
+        example: 30
+      medal:
+        type: string
+        maximum: 6
+        example: "NA"               
+
+
