@@ -21,6 +21,8 @@ tags:
     description: "Abaixo é possível visualizar os endpoints que interagem com o modelo Esporte."
   - name: "event"
     description: "Abaixo é possível visualizar os endpoints que interagem com o modelo Evento."
+  - name: "athleteevent"
+    description: "Abaixo é possível visualizar os endpoints que interagem com o modelo Athlete Evento."
 
 
 paths:
@@ -792,6 +794,134 @@ paths:
                 detail:
                   type: object
                   example: "Não encontrado."
+  /athlete/events/:
+    get:
+      summary: "Endpoint para listar os atletas e seus resultados em um evento. Aqui também é possível filtrar por: nome do atleta, time, título do evento, sexo e medalha. Basta adicionar a string <?search=parametro> após a barra."
+      tags:
+      - athleteevent
+      operationId: "list"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          type: array
+          description: "OK"
+          schema:
+            items:
+              $ref: "#/definitions/AthleteEvent"
+    post:
+      summary: "Endpoint para cadastrar um atleta e seus resultados."
+      tags:
+      - athleteevent
+      operationId: "create"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Será adicionado um novo registro de resultados de um atleta."
+        required: true
+        schema:
+          $ref: "#/definitions/AthleteEventCreate"
+      responses:
+        201:
+          type: array
+          description: "CREATED"
+          schema:
+            $ref: "#/definitions/AthleteEvent"
+  /athlete/event/{id}/:
+    get:
+      summary: "Endpoint para de detalhes de um participação do atleta em um evento."
+      tags:
+      - athleteevent
+      operationId: "detail"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID da participação"
+        type: int
+      responses:
+        200:
+          type: array
+          description: "OK"
+          schema:
+            $ref: "#/definitions/AthleteEvent"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
+    put:
+      summary: "Endpoint para atualizar da participação do(a) atleta no evento."
+      tags:
+      - athleteevent
+      operationId: "update"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID da participação"
+        type: int
+      - in: "body"
+        name: "body"
+        description: "Será atualizado os dados da participação do(a) atleta no evento."
+        required: true
+        schema:
+          $ref: "#/definitions/EventCreate"
+      responses:
+        200:
+          type: array
+          description: "OK"
+          schema:
+            $ref: "#/definitions/AthleteEvent"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
+    delete:
+      summary: "Endpoint para deletar a participação do atleta no evento."
+      tags:
+      - athleteevent
+      operationId: "delete"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID da participação do atleta no evento."
+        type: int
+      responses:
+        204:
+          type: array
+          description: "No Content"
+        404:
+            description: "Not found"
+            schema:
+              type: object
+              properties:
+                detail:
+                  type: object
+                  example: "Não encontrado."
 
 definitions:
   Team:
@@ -943,6 +1073,31 @@ definitions:
         example: 1
       game:
         type: int
-        example: 1           
+        example: 1
+  AthleteEvent:
+    type: object
+    properties:
+      id:
+        type: int
+        example: 1
+      event:
+        type: int
+        example: 1
+      athleta:
+        type: int
+        example: 1
+      weight:
+        type: decimal
+        example: 80.0
+      height:
+        type: int
+        example: 180
+      age:
+        type: int
+        example: 30
+      medal:
+        type: string
+        maximum: 6
+        example: "NA"               
 
 
